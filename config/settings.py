@@ -129,8 +129,17 @@ MEDIA_ROOT =os.path.join(BASE_DIR,'media')
 
 
 
+# openai configration
+
+# from dotenv import load_dotenv
+# load_dotenv()
+
+# OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
+import os
+
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration

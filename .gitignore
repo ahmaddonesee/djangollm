@@ -1,3 +1,7 @@
 env
 manage.py
 db.sqlite3
+openaikey.py 
+.env
+
+
