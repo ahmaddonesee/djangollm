@@ -63,3 +63,6 @@ http://localhost:8000/
 OPENAI_API_KEY=your_api_key_here
 
 ```
+user and password:
+admin    admin
+admin2   admin2
