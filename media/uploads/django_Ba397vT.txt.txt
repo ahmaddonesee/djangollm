@@ -1,0 +1,6 @@
+Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of django much of the hassle of web development, 'django' so you can focus on writing your app without needing to reinvent the wheel. It’s free and open source.
+
+
+Django was designed to help developers take applications from concept to completion as quickly as possible.
+
+Django takes security seriously and helps developers avoid many common security mistakes.

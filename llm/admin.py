@@ -93,7 +93,7 @@ class UploadFileAdmin(admin.ModelAdmin):
         if not obj.pk:
             obj.author = request.user
 
-        super().save_model(request, obj, form, change)
+        super().save_model(request, obj, form)
         # return obj.author == request.user
     
     def has_delete_permission(self, request, obj=None):
