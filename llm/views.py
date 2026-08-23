@@ -6,7 +6,10 @@ from django.http import HttpResponse,JsonResponse
 import openai,os
 from dotenv import load_dotenv
 from openai import OpenAI
-
+import environ
+# Initialize environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 load_dotenv(override=True)
 from openai import OpenAI

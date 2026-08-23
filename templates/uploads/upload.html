@@ -53,20 +53,20 @@
 
     </div>
     {% if not user.is_authenticated %}
-    <h3>you could add your file after login</h2>
+    <h4>you could add your file after login</h4>
 
     {% endif %}
 </div>
 
-{% if user.is_superuser or user == blog.author %}
+{% if user.is_superuser %}
 <div class="container mb-5" style="background-color:aquamarine;">
-    <h3>you can add your blog:</h3>
+    <h4> add your file:</h4>
     <br>
     <div class="container">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{form.as_p}}
-            <input type="submit" value="add blog" class="btn btn-primary mt-5 mb-5">
+            <input type="submit" value="add file" class="btn btn-primary mt-5 mb-5">
         </form>
     </div>
     <style>
