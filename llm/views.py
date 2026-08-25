@@ -3,6 +3,7 @@ from .models import UploadFile,Comment
 from .forms import UploadFileForm,CommentForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse,JsonResponse
+from django.core.files.storage import default_storage
 import openai,os
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -135,14 +136,15 @@ def delete_file(request,id):
     uploadfile=UploadFile.objects.get(id=id)
     user=User.objects.get(username=request.user.username)
     if user==uploadfile.author or request.user.is_superuser :
-        # if os.path.isfile(uploadfile.file):
-        #     os.remove(uploadfile.file.path)
-            uploadfile.delete()
-            return redirect('llm:upload_file')
-        # else:
-        #     return HttpResponse("not found file path")
+        # delete file from media
+        file_path = uploadfile.file.name 
+        if file_path and default_storage.exists(file_path):
+            default_storage.delete(file_path)
+        # delete oject from database
+        uploadfile.delete()
+        return redirect('llm:upload_file')
     else:
-        return HttpResponse("error")
+        return HttpResponse("you don't have permission to delet this item")
         
 
 
