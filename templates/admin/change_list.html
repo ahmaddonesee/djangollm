@@ -1,0 +1,49 @@
+{% extends "admin/change_list.html" %} {% block content %} {% if search_term %}
+
+<div
+  style="
+    {% comment %} background: ; {% endcomment %}
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+  "
+>
+  <h2>Search Result</h2>
+
+  {% if llm_answer %}
+
+  <div style="line-height: 1.7; white-space: normal">
+    {{ llm_answer|linebreaks }}
+  </div>
+
+  {% endif %}
+</div>
+
+<div
+  style="
+    {% comment %} background: ; {% endcomment %}
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+  "
+>
+  <h2>Related Documents</h2>
+
+  {% if related_documents %} {% for document in related_documents %}
+
+  <div style="padding: 10px; border-bottom: 1px solid #ddd">
+    📄 {{ document.name }}
+
+    <a href="{% url 'llm:read_file' document.id %}" style="margin-left: 20px">
+      View
+    </a>
+  </div>
+
+  {% endfor %} {% else %}
+
+  <p>No related documents found.</p>
+
+  {% endif %}
+</div>
+
+{% endif %} {{ block.super }} {% endblock %}

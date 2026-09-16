@@ -2,21 +2,58 @@
 
 {% block content %}
 
-<div class="container m-3">
+<div class="container my-4">
     <form method="POST">
-        {% csrf_token %}
-        <label>Ask a question:</label>
-        <input type="text" name="question">
-        <button type="submit"> Ask </button>
-    </form>
-    {% if answer %}
-        <h2>Answer</h2>
+    {% csrf_token %}
+
+    <input
+        type="text"
+        name="question"
+        placeholder="Search your documents..."
+        required
+    >
+
+    <button type="submit">
+        Search
+    </button>
+</form>
+<div class="container m-3">
+    <h3>Search Result</h3>
+    <h3>{{ question }}</h3>
+</div>
+{% if answer %}
+    <div class="search-result">
+        <h3>Search Result</h3>
         <p>{{ answer }}</p>
+        <div class="related-documents">
+    </div>
+{% endif %}
+    <div class="related-documents">
+    {% if related_documents %}
+
+        <h3>Related Documents</h3>
+
+        {% for document in related_documents %}
+
+            <div>
+                📄 {{ document.name }}
+
+                <a href="{% url 'llm:read_file' document.id %}">
+                    View
+                </a>
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No related documents found.</p>
+
     {% endif %}
-    {% if error %}
-        <h2>error</h2>
-        <p>{{ error }}</p>
-    {% endif %}
+
+    </div>
+
+
 </div>
 
 
@@ -58,7 +95,7 @@
     {% endif %}
 </div>
 
-{% if user.is_superuser %}
+{% if user.is_admin %}
 <div class="container mb-5" style="background-color:aquamarine;">
     <h4> add your file:</h4>
     <br>

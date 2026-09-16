@@ -1,12 +1,31 @@
 {% extends "base.html" %} {% block content %}
 <ul>
-  <li>{{uploadfile.author}}</li>
-  <li>{{uploadfile.text}}</li>
-  <li>{{uploadfile.name}}</li>
-  <li>{{uploadfile.file}}</li>
-  <li>{{uploadfile.id}}</li>
+  <li>author: {{uploadfile.author}}</li>
+  <li>text: {{uploadfile.text}}</li>
+  <li>name: {{uploadfile.name}}</li>
+  <li>file: {{uploadfile.file}}</li>
+  <li>id: {{uploadfile.id}}</li>
   <br />
-  <li>{{content}}</li>
+  <li>content:<b />{{content}}</li>
 </ul>
 
-{% endblock content %}
+{% comment %}
+<form method="POST">
+  {% csrf_token %}
+  <label>Ask a question:</label>
+  <input type="text" name="question" />
+  <button type="submit">Ask</button>
+</form>
+<button type="submit">Search</button>
+
+{% if answer %}
+<h2>Answer</h2>
+<p>{{ answer }}</p>
+{% endif %} {% if error %}
+<h2>error</h2>
+<p>{{ error }}</p>
+{% endif %} {% if batch_id %}
+<p>Question submitted successfully.</p>
+<p>Batch ID: {{ batch_id }}</p>
+<p>Status: {{ status }}</p>
+{% endif %} {% endcomment %} {% endblock content %}

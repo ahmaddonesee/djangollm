@@ -61,6 +61,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -128,8 +129,30 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT =os.path.join(BASE_DIR,'media')
 
 
-
 # openai configration
+
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / ".env")
+
+OPENROUTER_API_KEY = os.getenv("OPENAI_API_KEY")
+
+# import os
+
+OPENROUTER_API_KEY = os.environ["OPENAI_API_KEY"]
+SEARCH_MODEL = "nex-agi/nex-n2.5-mini:free" 
+# SEARCH_MODEL = "openai/gpt-6-astra" 
+
+AUTH_USER_MODEL = "register.MyUser"
+
+
+
+
+
 
 # from dotenv import load_dotenv
 # load_dotenv()
@@ -137,9 +160,9 @@ MEDIA_ROOT =os.path.join(BASE_DIR,'media')
 # OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
-import os
+# import os
 
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+# OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration

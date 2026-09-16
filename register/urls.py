@@ -1,5 +1,5 @@
 from django.urls import path 
-from . views import register,login_view,logout_view,delete_account
+from . views import register,login_view,logout_view,delete_account,admin_signup
 from django.contrib.auth.views import (
     LogoutView, 
     PasswordResetView, 
@@ -11,6 +11,7 @@ app_name="register"
 
 
 urlpatterns = [
+    path("admin/signup/",admin_signup,name="admin_signup"),
     path("",register,name="register"),
     path("login/",login_view,name="login_view"),
     path("logout/",logout_view,name="logout_view"),

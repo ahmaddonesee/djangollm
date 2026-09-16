@@ -1,0 +1,39 @@
+{% extends "admin/base_site.html" %} {% block content %}
+
+<h1>Search Files</h1>
+
+<form method="GET">
+  <input
+    type="text"
+    name="q"
+    value="{{ query }}"
+    placeholder="Enter file name"
+    style="width: 400px"
+  />
+
+  <button type="submit">Search</button>
+</form>
+
+{% if query %}
+
+<h2>Search results for: "{{ query }}"</h2>
+
+{% if files %}
+
+<ul>
+  {% for file in files %}
+
+  <li>
+    {{ file.name }}
+
+    <a href="{% url 'llm:read_file' file.id %}"> View </a>
+  </li>
+
+  {% endfor %}
+</ul>
+
+{% else %}
+
+<p>No files found.</p>
+
+{% endif %} {% endif %} {% endblock %}

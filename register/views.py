@@ -2,17 +2,55 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render,redirect
-from  .forms  import UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm 
 from django.contrib.auth.models import User
+from .forms import AdminSignUpForm
 # Create your views here.
 
+
+from django.shortcuts import render, redirect
+from .forms import AdminSignUpForm
+
+
+def admin_signup(request):
+
+    if request.method == "POST":
+        form = AdminSignUpForm(request.POST)
+
+        if form.is_valid():
+            user = form.save(commit=False)
+
+            user.set_password(
+                form.cleaned_data["password1"]
+            )
+
+            # User can access Django Admin
+            user.is_admin = True
+            # user.is_staff = True
+
+            # Save user
+            user.save()
+
+            return redirect("admin:login")
+
+    else:
+        form = AdminSignUpForm()
+
+    return render(
+        request,
+        "admin/signup.html",
+        {"form": form}
+    )
+
+
+
+
 def  register(request):
-    form = UserForm()
+    form = AdminSignUpForm()
     if request.method=="POST":
-        form=UserForm(request.POST)
+        form=AdminSignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
