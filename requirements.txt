@@ -5,7 +5,8 @@ django-environ==0.14.0
 requests==2.34.2
 langchain
 langchain_community
-qdrand_client==1.19.0
+#qdrand_client==1.19.0
+qdrand_client
 tiktoken
 langchain_groq
 fastembed
